@@ -1,18 +1,10 @@
-import json
 import sys
-import numpy as np
 
 from infrastucture.setup_verification import Setup
 from request import carrefour_request_content
 
 async def main():
-    file_name, products_count = Setup.setup_verification(sys.argv[1:])
-
-    file_content = open(file_name).read()
-
-    json_ctt = Setup.filter_errors(json.loads(file_content))
-
-    lines_to_test = Setup.select_test_lines(json_ctt, products_count)
+    lines_to_test = Setup.initialize_process(sys.argv)
             
     print("Number of lines to test: ", len(lines_to_test))
     

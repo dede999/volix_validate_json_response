@@ -1,3 +1,4 @@
+import json
 import numpy as np
 
 
@@ -6,12 +7,12 @@ PRODUCTS_TO_CHECK = 20
 class Setup:
     @staticmethod
     def setup_verification(argumets):
-        if len(argumets) < 1:
+        if len(argumets) < 2:
             print("Usage: python3 main.py <file_name> <products_count (default = 20)>")
-            return
+            return "", 0
         
-        file_name = argumets[0]
-        products_count = argumets[1] if len(argumets) == 2 else PRODUCTS_TO_CHECK
+        file_name = argumets[1]
+        products_count = argumets[2] if len(argumets) == 3 else PRODUCTS_TO_CHECK
         
         return file_name, products_count
     
@@ -35,3 +36,13 @@ class Setup:
                 lines_to_test.append(json_content[i])
                 
         return lines_to_test
+
+    @staticmethod
+    def initialize_process(arguments):
+        file_name, products_count = Setup.setup_verification(arguments)
+        if file_name == "":
+            return []
+
+        file_content = open(file_name).read()
+        json_ctt = Setup.filter_errors(json.loads(file_content))
+        return Setup.select_test_lines(json_ctt, products_count)
