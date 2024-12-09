@@ -45,4 +45,4 @@ class Setup:
 
         file_content = open(file_name).read()
         json_ctt = Setup.filter_errors(json.loads(file_content))
-        return Setup.select_test_lines(json_ctt, products_count)
+        return Setup.select_test_lines(json_ctt, products_count), file_name

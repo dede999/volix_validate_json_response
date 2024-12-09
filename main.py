@@ -4,7 +4,7 @@ from infrastucture.setup_verification import Setup
 from request import carrefour_request_content
 
 async def main():
-    lines_to_test = Setup.initialize_process(sys.argv)
+    lines_to_test, file_name = Setup.initialize_process(sys.argv)
             
     print("Number of lines to test: ", len(lines_to_test))
     
