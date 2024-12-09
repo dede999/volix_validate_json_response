@@ -2,37 +2,19 @@ import json
 import sys
 import numpy as np
 
-from infrastucture import setup_verification
+from infrastucture.setup_verification import Setup
 from request import carrefour_request_content
 
-PRODUCTS_TO_CHECK = 150
-
 async def main():
-    file_name, products_count = setup_verification(sys.argv[1:])
+    file_name, products_count = Setup.setup_verification(sys.argv[1:])
 
     file_content = open(file_name).read()
 
-    def has_no_error(line):
-        return not "error" in line
+    json_ctt = Setup.filter_errors(json.loads(file_content))
 
-    json_ctt = list(filter(has_no_error, json.loads(file_content)))
-    line_count = len(json_ctt)
-
-    prob = products_count / line_count
-
-    # print(json_ctt)
-    # print("Number of lines: ", line_count)
-    # print("Probability: ", prob)
-
-    lines_prob = np.random.rand(len(json_ctt)).tolist()
-    lines_to_test = []
-
-    for i in range(len(json_ctt)):
-        if lines_prob[i] < prob:
-            lines_to_test.append(json_ctt[i])
+    lines_to_test = Setup.select_test_lines(json_ctt, products_count)
             
-    # print("Number of lines to test: ", len(lines_to_test))
-    url = "https://www.google.com"
+    print("Number of lines to test: ", len(lines_to_test))
     
     result = await carrefour_request_content(lines_to_test[0]["link"])
     print(result)
