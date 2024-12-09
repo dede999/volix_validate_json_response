@@ -3,3 +3,16 @@ __pycache__
 
 output/*.csv
 data/*.json
+
+# Jupyter Notebook
+*/.ipynb_checkpoints
+*/*/.ipynb_checkpoints
+
+# PyCharm
+.idea/
+
+# MacOs
+.DS_Store
+*/.DS_Store
+*/*/.DS_Store
+*/*/*/DS_Store
