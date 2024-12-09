@@ -1,12 +1,16 @@
 import json
+import sys
 import numpy as np
 
+from infrastucture import setup_verification
 from request import carrefour_request_content
 
 PRODUCTS_TO_CHECK = 150
 
 async def main():
-    file_content = open('data/data1.json').read()
+    file_name, products_count = setup_verification(sys.argv[1:])
+
+    file_content = open(file_name).read()
 
     def has_no_error(line):
         return not "error" in line
@@ -14,7 +18,7 @@ async def main():
     json_ctt = list(filter(has_no_error, json.loads(file_content)))
     line_count = len(json_ctt)
 
-    prob = PRODUCTS_TO_CHECK / line_count
+    prob = products_count / line_count
 
     # print(json_ctt)
     # print("Number of lines: ", line_count)
