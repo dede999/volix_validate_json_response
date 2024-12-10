@@ -6,17 +6,6 @@ PRODUCTS_TO_CHECK = 20
 
 class Setup:
     @staticmethod
-    def setup_verification(argumets):
-        if len(argumets) < 2:
-            print("Usage: python3 main.py <file_name> <products_count (default = 20)>")
-            return "", 0
-        
-        file_name = argumets[1]
-        products_count = int(argumets[2]) if len(argumets) == 3 else PRODUCTS_TO_CHECK
-        
-        return file_name, products_count
-    
-    @staticmethod
     def filter_errors(json_content):
         def has_no_error(line):
             return not "error" in line
