@@ -1,16 +1,19 @@
 import sys
 
+from infrastucture.exceptions.non_existing_platform import NonExistingPlatformException
 from infrastucture.setup_verification import Setup
-from request import carrefour_request_content
+from service.data_validator import DataValidator
 
 async def main():
     lines_to_test, file_name = Setup.initialize_process(sys.argv)
             
     print("Number of lines to test: ", len(lines_to_test))
     
-    result = await carrefour_request_content(lines_to_test[0]["link"])
-    print(result)
-    return result
+    try:
+        await DataValidator(lines_to_test, file_name).test_runner()
+    except NonExistingPlatformException as e:
+        print(str(e))
+    
 
 if __name__ == "__main__":
     import asyncio
