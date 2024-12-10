@@ -12,7 +12,7 @@ class Setup:
             return "", 0
         
         file_name = argumets[1]
-        products_count = argumets[2] if len(argumets) == 3 else PRODUCTS_TO_CHECK
+        products_count = int(argumets[2]) if len(argumets) == 3 else PRODUCTS_TO_CHECK
         
         return file_name, products_count
     
