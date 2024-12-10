@@ -1,6 +1,6 @@
 import json
 import numpy as np
-
+from fastapi import UploadFile
 
 PRODUCTS_TO_CHECK = 20
 
@@ -27,11 +27,7 @@ class Setup:
         return lines_to_test
 
     @staticmethod
-    def initialize_process(arguments):
-        file_name, products_count = Setup.setup_verification(arguments)
-        if file_name == "":
-            return []
-
-        file_content = open(file_name).read()
+    def initialize_process(lines: int, file: UploadFile):
+        file_content = file.file.read()
         json_ctt = Setup.filter_errors(json.loads(file_content))
-        return Setup.select_test_lines(json_ctt, products_count), file_name
+        return Setup.select_test_lines(json_ctt, lines), file.filename
