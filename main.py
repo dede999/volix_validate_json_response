@@ -1,38 +1,19 @@
-import json
-import numpy as np
+import sys
 
-from request import carrefour_request_content
-
-PRODUCTS_TO_CHECK = 150
+from infrastucture.exceptions.non_existing_platform import NonExistingPlatformException
+from infrastucture.setup_verification import Setup
+from service.data_validator import DataValidator
 
 async def main():
-    file_content = open('data/data1.json').read()
-
-    def has_no_error(line):
-        return not "error" in line
-
-    json_ctt = list(filter(has_no_error, json.loads(file_content)))
-    line_count = len(json_ctt)
-
-    prob = PRODUCTS_TO_CHECK / line_count
-
-    # print(json_ctt)
-    # print("Number of lines: ", line_count)
-    # print("Probability: ", prob)
-
-    lines_prob = np.random.rand(len(json_ctt)).tolist()
-    lines_to_test = []
-
-    for i in range(len(json_ctt)):
-        if lines_prob[i] < prob:
-            lines_to_test.append(json_ctt[i])
+    lines_to_test, file_name = Setup.initialize_process(sys.argv)
             
-    # print("Number of lines to test: ", len(lines_to_test))
-    url = "https://www.google.com"
+    print("Number of lines to test: ", len(lines_to_test))
     
-    result = await carrefour_request_content(lines_to_test[0]["link"])
-    print(result)
-    return result
+    try:
+        await DataValidator(lines_to_test, file_name).test_runner()
+    except NonExistingPlatformException as e:
+        print(str(e))
+    
 
 if __name__ == "__main__":
     import asyncio
