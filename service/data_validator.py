@@ -28,8 +28,6 @@ class DataValidator:
             file.write(line)
             
     async def test_runner(self) -> dict:
-        self.print_file_content(
-            "Ean\tProdName\tTestProdName\tNameMatch\tPrice\tTestPrice\tPriceMatch\tBothMatch\tLinkUrl\n")
         for product in self.data:
             ean = product["ean"]
             expected_price = product["price_credit_card"]
@@ -56,7 +54,5 @@ class DataValidator:
                         "link": product["link"]
                         }
                 self.tracker.add_to_report(data, name_match, price_match)
-                line = f"{ean}\t{product_name}\t{result['title']}\t{name_match}\t{expected_price}\t{result['price']}\t{price_match}\t{both_match}\t{product['link']}\n"
-                self.print_file_content(line)
-        
+
         return self.tracker.print_report()
