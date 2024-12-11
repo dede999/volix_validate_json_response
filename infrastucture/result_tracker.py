@@ -7,6 +7,7 @@ class ResultTracker:
         self._name_fail = []
         self._price_fail = []
         self._both_fail = []
+        self.errors = []
         self._reports = [
             self._full_match, self._name_fail, self._price_fail, self._both_fail
         ]
@@ -16,11 +17,16 @@ class ResultTracker:
         report_keys = ["full_match", "name_fail", "price_fail", "both_fail"]
         for i, key in enumerate(report_keys):
             report[key] = self._reports[i]
+
+        report["errors"] = self.errors
         return report
 
     def add_to_report(self, result: dict, name_match: bool, price_match: bool):
         report_type = self._set_report_level(name_match, price_match)
         self._reports[report_type].append(result)
+
+    def add_error(self, error: dict):
+        self.errors.append(error)
 
     @staticmethod
     def _set_report_level(name_match: bool, price_match: bool):

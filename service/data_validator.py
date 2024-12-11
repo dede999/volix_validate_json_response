@@ -31,11 +31,19 @@ class DataValidator:
         self.print_file_content(
             "Ean\tProdName\tTestProdName\tNameMatch\tPrice\tTestPrice\tPriceMatch\tBothMatch\tLinkUrl\n")
         for product in self.data:
+            ean = product["ean"]
+            expected_price = product["price_credit_card"]
+            product_name = product["product_name"]
             result = await self.platform.request_content(product["link"])
-            if "error" not in result:
-                ean = product["ean"]
-                expected_price = product["price_credit_card"]
-                product_name = product["product_name"]
+            if "error" in result:
+                self.tracker.add_error({
+                    "ean": ean,
+                    "product_name": product_name,
+                    "price": expected_price,
+                    "error": result["error"],
+                    "link": product["link"]
+                })
+            else:
                 name_match = result["title"] == product_name
                 price_match = result["price"] == expected_price
                 both_match = name_match and price_match
