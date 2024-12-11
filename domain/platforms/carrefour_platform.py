@@ -1,4 +1,5 @@
 import re
+import ssl
 
 import aiohttp
 from bs4 import BeautifulSoup
@@ -80,10 +81,11 @@ class CarrefourPlatform(BasePlatform):
         return 0.0
 
     async def request_content(self, url: str):
+        ssl_context = self.set_ssl_context()
         async with aiohttp.ClientSession() as session:
             try:
                 async with session.get(
-                    url, headers=self.get_headers(), cookies=self.get_cookies()
+                    url, headers=self.get_headers(), cookies=self.get_cookies(), ssl=ssl_context
                 ) as response:
                     if response.status != 200:
                         return {"error": f"{response.status} - {response.reason}"}
