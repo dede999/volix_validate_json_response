@@ -1,12 +1,7 @@
 import re
-import ssl
-
 import aiohttp
 from bs4 import BeautifulSoup
 from domain.platforms.base_platform import BasePlatform
-from fake_useragent import UserAgent
-
-ua = UserAgent()
 
 class CarrefourPlatform(BasePlatform):
     def __init__(self):
@@ -28,7 +23,7 @@ class CarrefourPlatform(BasePlatform):
             'sec-fetch-site': 'same-origin',
             'sec-fetch-user': '?1',
             'upgrade-insecure-requests': '1',
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0',
+            'user-agent': self.create_random_user_agent(),
         }
         
     def get_cookies(self) -> dict[str, str]:

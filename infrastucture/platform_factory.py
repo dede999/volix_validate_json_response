@@ -1,5 +1,6 @@
 from domain.platforms.base_platform import BasePlatform
 from domain.platforms.carrefour_platform import CarrefourPlatform
+from domain.platforms.mercado_livre_platform import MercadoLivrePlatform
 from infrastucture.exceptions.non_existing_platform import NonExistingPlatformException
 
 
@@ -9,4 +10,4 @@ def platform_factory(platform: str) -> BasePlatform:
     try:
         return globals()[platform_name]()
     except KeyError:
-        raise NonExistingPlatformException(platform_name)
+        raise NonExistingPlatformException(platform, platform_name)

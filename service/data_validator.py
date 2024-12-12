@@ -42,9 +42,8 @@ class DataValidator:
                     "link": product["link"]
                 })
             else:
-                name_match = result["title"] == product_name
+                name_match = result["title"].lower() == product_name.lower()
                 price_match = result["price"] == expected_price
-                both_match = name_match and price_match
                 data = {
                         "ean": ean,
                         "product_name": product_name,

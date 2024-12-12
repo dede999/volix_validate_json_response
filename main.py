@@ -22,4 +22,4 @@ async def validate_map_data(file: UploadFile, response: Response, lines: Optiona
 
     except NonExistingPlatformException as e:
         response.status_code = status.HTTP_400_BAD_REQUEST
-        return { "result": str(e) }
+        return { "message": str(e) }
