@@ -9,4 +9,4 @@ def platform_factory(platform: str) -> BasePlatform:
     try:
         return globals()[platform_name]()
     except KeyError:
-        raise NonExistingPlatformException(f"{platform} ({platform_name})")
+        raise NonExistingPlatformException(platform, platform_name)
