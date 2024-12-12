@@ -1,6 +1,6 @@
 import ssl
 from abc import abstractmethod
-from typing import Any
+from fake_useragent import UserAgent
 
 
 class BasePlatform:
@@ -22,3 +22,7 @@ class BasePlatform:
         ssl_context.check_hostname = False
         ssl_context.verify_mode = ssl.CERT_NONE
         return ssl_context
+
+    @staticmethod
+    def create_random_user_agent():
+        return UserAgent().random
