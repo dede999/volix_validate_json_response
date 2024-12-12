@@ -1,25 +1,25 @@
-import sys
+from typing import Optional
+
+from fastapi import FastAPI, UploadFile, status, Response
 
 from infrastucture.exceptions.non_existing_platform import NonExistingPlatformException
 from infrastucture.setup_verification import Setup
 from service.data_validator import DataValidator
 
-async def main():
-    lines_to_test, file_name = Setup.initialize_process(sys.argv)
-            
-    print("Number of lines to test: ", len(lines_to_test))
-    
+app = FastAPI()
+
+@app.get("/")
+async def root():
+    return { "message": "Hello World" }
+
+@app.post("/validate", status_code=status.HTTP_200_OK)
+async def validate_map_data(file: UploadFile, response: Response, lines: Optional[int] = 20):
+    lines_to_test, file_name = Setup.initialize_process(lines, file)
+
     try:
-        await DataValidator(lines_to_test, file_name).test_runner()
+        result = await DataValidator(lines_to_test, file_name).test_runner()
+        return { "result": result }
+
     except NonExistingPlatformException as e:
-        print(str(e))
-    
-
-if __name__ == "__main__":
-    import asyncio
-    asyncio.run(main())
-
-
-# for line in lines_to_test:
-#     print(line)
-#     print("\n")
+        response.status_code = status.HTTP_400_BAD_REQUEST
+        return { "result": str(e) }
