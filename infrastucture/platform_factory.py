@@ -1,6 +1,7 @@
 from domain.platforms.base_platform import BasePlatform
 from domain.platforms.carrefour_platform import CarrefourPlatform
 from domain.platforms.mercado_livre_platform import MercadoLivrePlatform
+from domain.platforms.magazine_luiza_platform import MagazineLuizaPlatform
 from infrastucture.exceptions.non_existing_platform import NonExistingPlatformException
 
 
