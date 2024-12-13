@@ -4,14 +4,21 @@ from fake_useragent import UserAgent
 
 
 class BasePlatform:
-    @abstractmethod
+    def __init__(self):
+        print(f"{self.__class__.__name__} initialized")
+
     def get_headers(self) -> dict[str, str]:
-        pass
+        return {}
     
-    @abstractmethod
     def get_cookies(self) -> dict[str, str]:
-        pass
+        return {}
     
+    def get_price(self) -> float:
+        return 0.0
+
+    def get_title(self) -> str:
+        return ""
+
     @abstractmethod
     async def request_content(self, url: str):
         pass
