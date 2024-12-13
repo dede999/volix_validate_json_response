@@ -1,6 +1,3 @@
-from aiohttp import ClientSession
-from bs4 import BeautifulSoup
-
 from domain.platforms.beautiful_soup_platform import BeautifulSoupPlatform
 
 
