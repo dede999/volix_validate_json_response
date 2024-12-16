@@ -1,4 +1,5 @@
 from domain.platforms.base_platform import BasePlatform
+from domain.platforms.amazon_platform import AmazonPlatform
 from domain.platforms.carrefour_platform import CarrefourPlatform
 from domain.platforms.mercado_livre_platform import MercadoLivrePlatform
 from domain.platforms.magazine_luiza_platform import MagazineLuizaPlatform
