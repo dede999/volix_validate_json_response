@@ -1,13 +1,10 @@
 import re
-import aiohttp
-from bs4 import BeautifulSoup
-from domain.platforms.base_platform import BasePlatform
+from domain.platforms.beautiful_soup_platform import BeautifulSoupPlatform
 
-class CarrefourPlatform(BasePlatform):
-    def __init__(self):
-        self.soup = None
-        print("CarrefourPlatform initialized")
+print("CarrefourPlatform initialized")
 
+
+class CarrefourPlatform(BeautifulSoupPlatform):
     def get_headers(self) -> dict[str, str]:
         return {
             'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
@@ -63,7 +60,6 @@ class CarrefourPlatform(BasePlatform):
     def get_title(self):
         return self.soup.find('h2', class_='text-text').text
 
-
     def get_price(self):
         script_text = self.soup.find_all('script')
         regex = re.compile(r'"Value":\d+\.\d+')
@@ -74,24 +70,3 @@ class CarrefourPlatform(BasePlatform):
                 return float(match.group().split(":")[1])
 
         return 0.0
-
-    async def request_content(self, url: str):
-        ssl_context = self.set_ssl_context()
-        async with aiohttp.ClientSession() as session:
-            try:
-                async with session.get(
-                    url, headers=self.get_headers(), cookies=self.get_cookies(), ssl=ssl_context
-                ) as response:
-                    if response.status != 200:
-                        return {"error": f"{response.status} - {response.reason}"}
-                    
-
-                    html = await response.text()
-                    self.soup = BeautifulSoup(html, 'html.parser')
-                    title = self.get_title()
-                    price = self.get_price()
-
-                    return { "title": title, "price": price }
-                
-            except Exception as e:
-                return {"error": str(e)}

@@ -1,13 +1,7 @@
-from aiohttp import ClientSession
-from bs4 import BeautifulSoup
+from domain.platforms.beautiful_soup_platform import BeautifulSoupPlatform
 
-from domain.platforms.base_platform import BasePlatform
 
-class MercadoLivrePlatform(BasePlatform):
-    def __init__(self):
-        self.soup = None
-        print("MercadoLivrePlatform initialized")
-
+class MercadoLivrePlatform(BeautifulSoupPlatform):
     def get_headers(self) -> dict[str, str]:
         return {
             'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
@@ -25,9 +19,6 @@ class MercadoLivrePlatform(BasePlatform):
             'upgrade-insecure-requests': '1',
             'user-agent': self.create_random_user_agent(),
         }
-
-    def get_cookies(self) -> dict[str, str]:
-        return {}
 
     def get_title(self):
         return self.soup.find('h1', class_='ui-pdp-title').text
@@ -51,20 +42,3 @@ class MercadoLivrePlatform(BasePlatform):
         cents = self.get_cents_price()
         price = (100 * int(whole) + int(cents)) / 100
         return price
-
-    async def request_content(self, url: str):
-        async with ClientSession() as session:
-            try:
-                async with session.get(url, headers=self.get_headers()) as response:
-                    if response.status != 200:
-                        return { 'error': f"Error {response.status} - {response.reason}" }
-
-                    html = await response.text()
-                    self.soup = BeautifulSoup(html, 'html.parser')
-                    title = self.get_title()
-                    price = self.get_price()
-
-                    return { "title": title, "price": price }
-
-            except Exception as e:
-                return { 'error': str(e) }
