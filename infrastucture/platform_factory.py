@@ -3,6 +3,7 @@ from domain.platforms.amazon_platform import AmazonPlatform
 from domain.platforms.carrefour_platform import CarrefourPlatform
 from domain.platforms.mercado_livre_platform import MercadoLivrePlatform
 from domain.platforms.magazine_luiza_platform import MagazineLuizaPlatform
+from domain.platforms.valid_test_platform import ValidTestPlatform
 from infrastucture.exceptions.non_existing_platform import NonExistingPlatformException
 
 
