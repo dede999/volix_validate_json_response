@@ -1,0 +1,67 @@
+[
+    {
+        "searched_term": "NOTEBOOK FE15 CORE I7 8GB SSD",
+        "status_code": 404,
+        "error": "No product data found"
+    },
+    {
+        "date": "2024-12-05 14:45:57",
+        "searched_term": "A Light in the Attic",
+        "sku": "SA0812",
+        "ean": "7891112005969",
+        "custom_terms": {},
+        "product_name": "A Light in the Attic",
+        "link": "https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html",
+        "platform": "Valid Test",
+        "seller": "Olist",
+        "price_credit_card": 51.77
+    },
+    {
+        "date": "2024-12-05 14:45:57",
+        "searched_term": "Sharp Objects",
+        "sku": "SA0812",
+        "ean": "7891112005980",
+        "custom_terms": {},
+        "product_name": "Sharp Objectss",
+        "link": "https://books.toscrape.com/catalogue/sharp-objects_997/index.html",
+        "platform": "Valid Test",
+        "seller": "Olist",
+        "price_credit_card": 47.82
+    },
+    {
+        "date": "2024-12-05 14:45:57",
+        "searched_term": "The Requiem Red",
+        "sku": "SA0812",
+        "ean": "7891112001234",
+        "custom_terms": {},
+        "product_name": "The Requiem Red",
+        "link": "https://books.toscrape.com/catalogue/the-requiem-red_1000/index.html",
+        "platform": "Valid Test",
+        "seller": "Olist",
+        "price_credit_card": 22.65
+    },
+    {
+        "date": "2024-12-05 14:45:57",
+        "searched_term": "It's Only the Himalayas",
+        "sku": "SA0812",
+        "ean": "7891112005678",
+        "custom_terms": {},
+        "product_name": "It's Only the Himalaias",
+        "link": "https://books.toscrape.com/catalogue/its-only-the-himalayas_981/index.html",
+        "platform": "Valid Test",
+        "seller": "Olist",
+        "price_credit_card": 22.66
+    },
+    {
+        "date": "2024-12-05 14:45:57",
+        "searched_term": "Silence in the Dark (Logan Point #4)",
+        "sku": "SA0812",
+        "ean": "7891112009101",
+        "custom_terms": {},
+        "product_name": "Silence in the Dark (Logan Point #4)",
+        "link": "https://books.toscrape.com/catalogue/silence-in-the-dark-logan-point-4_542/index.html",
+        "platform": "Valid Test",
+        "seller": "Olist",
+        "price_credit_card": 55.33
+    }
+]
