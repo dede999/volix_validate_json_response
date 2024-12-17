@@ -13,11 +13,13 @@ async def root():
     return { "message": "Hello World" }
 
 @app.post("/validate", status_code=status.HTTP_200_OK)
-async def validate_map_data(file: UploadFile, response: Response, lines: Optional[int] = 20):
+async def validate_map_data(
+        file: UploadFile, response: Response, lines: Optional[int] = 20,
+        ean_key: Optional[str] = "ean"):
     lines_to_test, file_name = Setup.initialize_process(lines, file)
 
     try:
-        result = await DataValidator(lines_to_test, file_name).test_runner()
+        result = await DataValidator(lines_to_test, file_name).test_runner(ean_key)
         return { "result": result }
 
     except NonExistingPlatformException as e:
