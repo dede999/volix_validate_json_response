@@ -6,11 +6,12 @@ PRODUCTS_TO_CHECK = 20
 
 class Setup:
     @staticmethod
+    def line_is_valid(line):
+        return (not "error" in line) and ("link" in line)
+
+    @staticmethod
     def filter_errors(json_content):
-        def has_no_error(line):
-            return not "error" in line
-        
-        return list(filter(has_no_error, json_content))
+        return list(filter(Setup.line_is_valid, json_content))
 
     @staticmethod
     def select_test_lines(json_content, products_count):
