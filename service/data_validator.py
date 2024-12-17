@@ -27,9 +27,9 @@ class DataValidator:
         with open(f"output/{self.time.strftime('%d_%m_%Y_%H_%M')}_{self.client}_{self.snake_case_platform()}.csv", 'a', encoding='utf-8') as file:
             file.write(line)
             
-    async def test_runner(self) -> dict:
+    async def test_runner(self, ean_key: str) -> dict:
         for product in self.data:
-            ean = product["ean"]
+            ean = product[ean_key]
             expected_price = product["price_credit_card"]
             product_name = product["product_name"]
             result = await self.platform.request_content(product["link"])
