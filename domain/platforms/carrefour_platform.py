@@ -1,9 +1,6 @@
 import re
 from domain.platforms.beautiful_soup_platform import BeautifulSoupPlatform
 
-print("CarrefourPlatform initialized")
-
-
 class CarrefourPlatform(BeautifulSoupPlatform):
     def get_headers(self) -> dict[str, str]:
         return {
