@@ -15,3 +15,6 @@ class ValidationConfig:
                 return key
 
         raise InvalidValidationKey(context)
+
+    def get_platform_name(self) -> str:
+        return self.sample["platform"]
