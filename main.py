@@ -18,7 +18,7 @@ async def validate_map_data(response: Response,lines: int = Form(...),
     lines_to_test, file_name = Setup.initialize_process(lines, file)
 
     try:
-        result = await DataValidator(lines_to_test, file_name).test_runner(ean_key)
+        result = await DataValidator(lines_to_test, file_name, ean_key).test_runner()
         return { "result": result }
 
     except NonExistingPlatformException as e:
