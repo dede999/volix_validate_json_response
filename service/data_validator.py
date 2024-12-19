@@ -1,37 +1,26 @@
 
 from datetime import datetime
-
 from infrastucture.platform_factory import platform_factory
 from infrastucture.result_tracker import ResultTracker
+from infrastucture.validation_config import ValidationConfig
 
 
 class DataValidator:
-    def __init__(self, data, file_name):
+    def __init__(self, data: any, file_name: str, ean_key: str):
         self.time = datetime.now()
         self.data = data
-        self.client = file_name.split("_")[0].split("/")[-1]
-        self.platform_name = ""
-        self.get_platform()
+        self.config = ValidationConfig(self.data[0], ean_key)
+        self.client = self.config.get_client_name(file_name)
+        self.platform_name = self.config.get_platform_name()
         self.tracker = ResultTracker()
         self.platform = platform_factory(self.platform_name)
         print(f"DataValidator initialized at {self.time.strftime('%d_%m_%Y')} for {self.client} on {self.platform_name}")
 
-    def get_platform(self):
-        if len(self.data) > 0:
-            self.platform_name = self.data[0]["platform"]
-            
-    def snake_case_platform(self):
-        return self.platform_name.lower().replace(" ", "_")
-
-    def print_file_content(self, line):
-        with open(f"output/{self.time.strftime('%d_%m_%Y_%H_%M')}_{self.client}_{self.snake_case_platform()}.csv", 'a', encoding='utf-8') as file:
-            file.write(line)
-            
-    async def test_runner(self, ean_key: str) -> dict:
+    async def test_runner(self) -> dict:
         for product in self.data:
-            ean = product[ean_key]
-            expected_price = product["price_credit_card"]
-            product_name = product["product_name"]
+            ean = product[self.config.ean_key]
+            expected_price = product[self.config.price_key]
+            product_name = product[self.config.name_key]
             result = await self.platform.request_content(product["link"])
             if "error" in result:
                 self.tracker.add_error({
