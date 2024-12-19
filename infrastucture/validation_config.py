@@ -18,3 +18,7 @@ class ValidationConfig:
 
     def get_platform_name(self) -> str:
         return self.sample["platform"]
+
+    @staticmethod
+    def get_client_name(file_name: str) -> str:
+        return file_name.split("_")[0].split("/")[-1]
