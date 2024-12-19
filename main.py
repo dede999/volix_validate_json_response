@@ -2,6 +2,7 @@ from typing import Optional
 
 from fastapi import FastAPI, UploadFile, status, Response, Form, File
 
+from infrastucture.exceptions.invalid_validation_key import InvalidValidationKey
 from infrastucture.exceptions.non_existing_platform import NonExistingPlatformException
 from infrastucture.setup_verification import Setup
 from service.data_validator import DataValidator
@@ -23,4 +24,8 @@ async def validate_map_data(response: Response,lines: int = Form(...),
 
     except NonExistingPlatformException as e:
         response.status_code = status.HTTP_400_BAD_REQUEST
+        return { "message": str(e) }
+
+    except InvalidValidationKey as e:
+        response.status_code = status.HTTP_422_UNPROCESSABLE_ENTITY
         return { "message": str(e) }
