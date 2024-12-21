@@ -2,9 +2,9 @@ from typing import Optional
 
 from fastapi import FastAPI, UploadFile, status, Response, Form, File
 
-from infrastucture.exceptions.invalid_validation_key import InvalidValidationKey
-from infrastucture.exceptions.non_existing_platform import NonExistingPlatformException
-from infrastucture.setup_verification import Setup
+from infrastructure.exceptions.invalid_validation_key import InvalidValidationKey
+from infrastructure.exceptions.non_existing_platform import NonExistingPlatformException
+from infrastructure.setup_verification import Setup
 from service.data_validator import DataValidator
 
 app = FastAPI()
