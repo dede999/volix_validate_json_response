@@ -1,9 +1,9 @@
 from random import uniform, randint
-from unittest import TestCase
+from unittest import IsolatedAsyncioTestCase
 from unittest.mock import patch, MagicMock
 from domain.platforms.selenium_platform import SeleniumPlatform
 
-class TestSeleniumPlatform(TestCase):
+class TestSeleniumPlatform(IsolatedAsyncioTestCase):
     @patch('domain.platforms.selenium_platform.webdriver.Firefox')
     @patch('domain.platforms.selenium_platform.WebDriverWait')
     @patch('domain.platforms.selenium_platform.GeckoDriverManager')
