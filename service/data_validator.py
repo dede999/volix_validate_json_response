@@ -1,8 +1,8 @@
 
 from datetime import datetime
-from infrastucture.platform_factory import platform_factory
-from infrastucture.result_tracker import ResultTracker
-from infrastucture.validation_config import ValidationConfig
+from infrastructure.platform_factory import platform_factory
+from infrastructure.result_tracker import ResultTracker
+from infrastructure.validation_config import ValidationConfig
 
 
 class DataValidator:

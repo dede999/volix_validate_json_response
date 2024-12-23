@@ -1,4 +1,4 @@
-from infrastucture.exceptions.invalid_validation_key import InvalidValidationKey
+from infrastructure.exceptions.invalid_validation_key import InvalidValidationKey
 
 
 class ValidationConfig:

@@ -2,9 +2,9 @@ from typing import Optional
 
 from fastapi import FastAPI, UploadFile, status, Response, Form, File
 
-from infrastucture.exceptions.invalid_validation_key import InvalidValidationKey
-from infrastucture.exceptions.non_existing_platform import NonExistingPlatformException
-from infrastucture.setup_verification import Setup
+from infrastructure.exceptions.invalid_validation_key import InvalidValidationKey
+from infrastructure.exceptions.non_existing_platform import NonExistingPlatformException
+from infrastructure.setup_verification import SetupVerification
 from service.data_validator import DataValidator
 
 app = FastAPI()
@@ -16,7 +16,7 @@ async def root():
 @app.post("/validate", status_code=status.HTTP_200_OK)
 async def validate_map_data(response: Response,lines: int = Form(...),
                             ean_key: Optional[str] = Form(...), file: UploadFile = File(...)):
-    lines_to_test, file_name = Setup.initialize_process(lines, file)
+    lines_to_test, file_name = SetupVerification.initialize_process(lines, file)
 
     try:
         result = await DataValidator(lines_to_test, file_name, ean_key).test_runner()
