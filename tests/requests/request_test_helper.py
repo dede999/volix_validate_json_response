@@ -11,7 +11,7 @@ class RequestTestHelper(TestCase):
         self.case = ""
 
     def open_file(self):
-        file_path = os.path.join("fixtures", f"client_{self.case}_2024_12_16_09.json")
+        file_path = os.path.join("tests", "fixtures", f"client_{self.case}_2024_12_16_09.json")
         absolute_path = os.path.abspath(file_path)
         print(f"File path: {absolute_path}")
 

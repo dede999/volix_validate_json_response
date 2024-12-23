@@ -1,10 +1,14 @@
-from unittest import TestCase
+import asyncio
+from unittest import IsolatedAsyncioTestCase
 from unittest.mock import patch
 
 from domain.platforms.base_platform import BasePlatform
 
+class DummyPlatform(BasePlatform):
+    async def request_content(self, url: str):
+        return "dummy_content"
 
-class TestBasePlatform(TestCase):
+class TestBasePlatform(IsolatedAsyncioTestCase):
     def setUp(self):
         self.base_platform = BasePlatform()
 
@@ -30,3 +34,7 @@ class TestBasePlatform(TestCase):
         user_agent_mock.return_value.random = "random_user_agent"
         self.assertEqual(self.base_platform.create_random_user_agent(), "random_user_agent")
         user_agent_mock.assert_called_once()
+
+    def test_request_content(self):
+        content = asyncio.run(self.base_platform.request_content("dummy_url"))
+        self.assertEqual(content, None)
