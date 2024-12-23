@@ -58,7 +58,7 @@ class PriceNameKeysTest(RequestTestHelper):
                 "sku": "SA0812",
                 "ean": "7891112005969",
                 "custom_terms": {},
-                "name_product": "A Light in the Attic",
+                "product_name": "A Light in the Attic",
                 "link": "https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html",
                 "platform": "Valid Test",
                 "seller": "Olist",
