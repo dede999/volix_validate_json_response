@@ -1,0 +1,12 @@
+[run]
+source =
+    domain
+    infrastructure
+    service
+
+[report]
+omit =
+    */tests/*
+    */__init__.py
+
+fail_under = 100
