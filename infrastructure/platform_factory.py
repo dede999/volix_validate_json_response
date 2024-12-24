@@ -5,6 +5,7 @@ from domain.platforms.mercado_livre_platform import MercadoLivrePlatform
 from domain.platforms.magazine_luiza_platform import MagazineLuizaPlatform
 from domain.platforms.valid_test_platform import ValidTestPlatform
 from domain.platforms.andra_platform import AndraPlatform
+from domain.platforms.dimensional_platform import DimensionalPlatform
 from infrastructure.exceptions.non_existing_platform import NonExistingPlatformException
 
 
