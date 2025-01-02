@@ -10,6 +10,9 @@ class TestBeautifulSoupPlatform(IsolatedAsyncioTestCase):
         self.beautiful_soup_platform.get_title = MagicMock(return_value=f"Product Title {randint(1, 100)}")
         self.beautiful_soup_platform.get_price = MagicMock(return_value=uniform(50.0, 150.0))
 
+    def test_valid_instances_count(self):
+        self.assertEqual(self.beautiful_soup_platform.get_validation_instances_count(), 50)
+
     @patch('domain.platforms.base_platform.ssl.create_default_context')
     @patch('domain.platforms.beautiful_soup_platform.BeautifulSoup')
     @patch('domain.platforms.beautiful_soup_platform.ClientSession')

@@ -5,6 +5,8 @@ from domain.platforms.base_platform import BasePlatform
 
 
 class BeautifulSoupPlatform(BasePlatform):
+    VALIDATION_INSTANCES = 50
+
     def __init__(self):
         super().__init__()
         self.soup = None
