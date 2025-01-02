@@ -49,9 +49,10 @@ This application is designed to validate data from various platforms using FastA
 
 ### Necessary parameters
 
-- `lines`: The number of lines to validate.
+- `lines`: The number of instances to validate.
   - Type: `int`
-  - If selected number of lines is greater than the number of lines in the file, the validation will be done for all lines.
+  - If selected number is greater than the number of instances in the file, the validation will be done for all of them.
+  - The word lines were chosen because the first kind of verified  files were JSON lines.
 - `ean_key`: The key to use for the EAN validation.
   - Type: `str` 
 - `file`: The file to validate.
