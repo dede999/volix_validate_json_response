@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 import subprocess
 
+print("Installing dependencies...")
 subprocess.run(["pip", "install", "-r", "requirements.txt"])
-subprocess.run(["pip", "install", "\"fastapi[standard]\""])
+
+print("Installing FastAPI standard version...")
+subprocess.run(["pip", "install", "fastapi[standard]"])
