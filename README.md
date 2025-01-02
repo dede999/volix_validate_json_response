@@ -47,6 +47,21 @@ This application is designed to validate data from various platforms using FastA
 - `GET /`: Returns a welcome message.
 - `POST /validate`: Validates the uploaded file data.
 
+### Necessary parameters
+
+- `lines`: The number of lines to validate.
+  - Type: `int`
+  - If selected number of lines is greater than the number of lines in the file, the validation will be done for all lines.
+- `ean_key`: The key to use for the EAN validation.
+  - Type: `str` 
+- `file`: The file to validate.
+  - Type: `file`
+  - Only JSON is supported.
+  - The name of the file must follow the pattern: `platform_name_date_time.json`.
+  - The data  must have the EAN key
+  - The product name must be identified  by `product_name` or `product` key
+  - The product price must be identified by `price`, `product_price` or `product_price` key
+
 ### Example Requests
 
 #### Development Environment
