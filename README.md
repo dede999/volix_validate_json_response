@@ -30,14 +30,14 @@ This application is designed to validate data from various platforms using FastA
 
 1. Install the dependencies:
     ```sh
-    pip install -r requirements.txt
+      python bin/builder
     ```
 
 ## Running the Application
 
 1. Start the FastAPI server:
     ```sh
-    uvicorn main:app --reload
+      uvicorn main:app --reload --host 0.0.0.0 --port 8000
     ```
 
 2. Open your browser and navigate to `http://127.0.0.1:8000` to see the API documentation.
@@ -47,7 +47,9 @@ This application is designed to validate data from various platforms using FastA
 - `GET /`: Returns a welcome message.
 - `POST /validate`: Validates the uploaded file data.
 
-### Example Request
+### Example Requests
+
+#### Development Environment
 
 ```sh
 curl -X 'POST' \
@@ -57,6 +59,14 @@ curl -X 'POST' \
   -F 'lines=10' \
   -F 'ean_key=some_key' \
   -F 'file=@path/to/your/file.csv' | json_pp
+```
+
+#### Production Environment
+```shell
+curl --location --request POST 'https://volix-validate-json-response.onrender.com/validate' \                                                                                         
+--form 'file=@"/Users/andre_luiz/PycharmProjects/volix-scrapings/collect/santil/andra/santil_andra_2024-12-24-10.json"' \
+--form 'lines="50"' \
+--form 'ean_key="sku"' | json_pp
 ```
 
 ## Running Tests
