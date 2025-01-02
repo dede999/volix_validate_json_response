@@ -22,7 +22,7 @@ class TestSetupVerification(unittest.TestCase):
         random_return = MagicMock()
         random_return.tolist.return_value = [0.1, 0.5, 0.9]
         with patch('numpy.random.rand', return_value=random_return):
-            selected = SetupVerification.select_test_lines(json_content, 2)
+            selected = SetupVerification.probabilistic_line_selection(json_content, 2)
             self.assertEqual(selected, [{"link": "link1"}, {"link": "link2"}])
 
     def test_process_is_initialized_correctly(self):
