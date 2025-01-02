@@ -2,8 +2,6 @@ import json
 import numpy as np
 from fastapi import UploadFile
 
-PRODUCTS_TO_CHECK = 20
-
 class SetupVerification:
     @staticmethod
     def line_is_valid(line):
