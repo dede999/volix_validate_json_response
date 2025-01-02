@@ -24,9 +24,3 @@ class SetupVerification:
                 lines_to_test.append(json_content[i])
                 
         return lines_to_test
-
-    @staticmethod
-    def initialize_process(lines: int, file: UploadFile):
-        file_content = file.file.read()
-        json_ctt = SetupVerification.filter_errors(json.loads(file_content))
-        return SetupVerification.probabilistic_line_selection(json_ctt, lines), file.filename
