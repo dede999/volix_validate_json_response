@@ -8,7 +8,7 @@ class SetupVerification:
         return (not "error" in line) and ("link" in line)
 
     @staticmethod
-    def filter_errors(json_content):
+    def select_valid_lines(json_content):
         return list(filter(SetupVerification.line_is_valid, json_content))
 
     @staticmethod

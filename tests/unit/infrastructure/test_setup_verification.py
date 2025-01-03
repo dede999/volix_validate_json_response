@@ -14,7 +14,7 @@ class TestSetupVerification(unittest.TestCase):
 
     def test_errors_are_filtered_out(self):
         json_content = [{"error": "some error", "link": "some link"}, {"link": "valid link"}]
-        filtered = SetupVerification.filter_errors(json_content)
+        filtered = SetupVerification.select_valid_lines(json_content)
         self.assertEqual(filtered, [{"link": "valid link"}])
 
     def test_lines_are_selected_based_on_probability(self):
