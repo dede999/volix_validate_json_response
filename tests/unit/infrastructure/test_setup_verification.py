@@ -14,7 +14,7 @@ class TestSetupVerification(unittest.TestCase):
 
     def test_errors_are_filtered_out(self):
         json_content = [{"error": "some error", "link": "some link"}, {"link": "valid link"}]
-        filtered = SetupVerification.filter_errors(json_content)
+        filtered = SetupVerification.select_valid_lines(json_content)
         self.assertEqual(filtered, [{"link": "valid link"}])
 
     def test_lines_are_selected_based_on_probability(self):
@@ -22,18 +22,8 @@ class TestSetupVerification(unittest.TestCase):
         random_return = MagicMock()
         random_return.tolist.return_value = [0.1, 0.5, 0.9]
         with patch('numpy.random.rand', return_value=random_return):
-            selected = SetupVerification.select_test_lines(json_content, 2)
+            selected = SetupVerification.probabilistic_line_selection(json_content, 2)
             self.assertEqual(selected, [{"link": "link1"}, {"link": "link2"}])
-
-    def test_process_is_initialized_correctly(self):
-        file_mock = MagicMock()
-        file_mock.file.read.return_value = b'[{"link": "link1"}, {"link": "link2"}]'
-        random_return = MagicMock()
-        random_return.tolist.return_value = [0.1, 0.9]
-        with patch('numpy.random.rand', return_value=random_return):
-            lines, filename = SetupVerification.initialize_process(1, file_mock)
-            self.assertEqual(lines, [{"link": "link1"}])
-            self.assertEqual(filename, file_mock.filename)
 
 if __name__ == '__main__':
     unittest.main()

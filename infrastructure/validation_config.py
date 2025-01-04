@@ -1,11 +1,15 @@
+from infrastructure.platform_factory import platform_factory
 from infrastructure.exceptions.invalid_validation_key import InvalidValidationKey
 
 
 class ValidationConfig:
-    def __init__(self, data_sample: dict, ean_key: str):
+    def __init__(self, data_sample: dict, ean_key: str, file_name: str):
         self.sample = data_sample
         self.ean_key = ean_key
         self.sample_keys = list(self.sample.keys())
+        self.client = self.get_client_name(file_name)
+        self.platform_name = self.get_platform_name()
+        self.platform = platform_factory(self.platform_name)
         self.name_key = self.detect_used_key(["product_name", "product"], "product name")
         self.price_key = self.detect_used_key(["price", "price_credit_card", "price_pix"], "price")
 

@@ -4,6 +4,8 @@ from fake_useragent import UserAgent
 
 
 class BasePlatform:
+    VALIDATION_INSTANCES = 10
+
     def __init__(self):
         print(f"{self.__class__.__name__} initialized")
 
@@ -22,6 +24,9 @@ class BasePlatform:
     @abstractmethod
     async def request_content(self, url: str):
         pass
+
+    def get_validation_instances_count(self):
+        return self.VALIDATION_INSTANCES
 
     @staticmethod
     def set_ssl_context():
