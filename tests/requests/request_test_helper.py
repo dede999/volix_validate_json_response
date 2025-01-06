@@ -27,7 +27,7 @@ class RequestTestHelper(TestCase):
         files = self.open_file()
         return self.client.post(
             f"/validate",
-            files=files, data={"lines": str(lines), "ean_key": "ean"})
+            files=files, data={"ean_key": "ean"})
 
     def tearDown(self):
         # Ensure file is closed if it was opened
