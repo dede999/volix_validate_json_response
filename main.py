@@ -21,11 +21,11 @@ async def root():
 async def validate_map_data(response: Response, ean_key: Optional[str] = Form(...), file: UploadFile = File(...)):
     file_content = file.file.read().decode("utf-8")
     valid_lines = SetupVerification.select_valid_lines(json.loads(file_content))
-    config = ValidationConfig(valid_lines[0], ean_key, file.filename)
-    platform_lines = config.platform.get_validation_instances_count()
-    lines_to_test = SetupVerification.probabilistic_line_selection(valid_lines, platform_lines)
 
     try:
+        config = ValidationConfig(valid_lines[0], ean_key, file.filename)
+        platform_lines = config.platform.get_validation_instances_count()
+        lines_to_test = SetupVerification.probabilistic_line_selection(valid_lines, platform_lines)
         result = await DataValidator(lines_to_test, config).test_runner()
         return { "result": result }
 
