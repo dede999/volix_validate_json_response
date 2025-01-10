@@ -50,6 +50,7 @@ This application is designed to validate data from various platforms using FastA
 ### Necessary parameters
 
 - `lines`: The number of instances to validate.
+  - Deprecated 
   - Type: `int`
   - If selected number is greater than the number of instances in the file, the validation will be done for all of them.
   - The word lines were chosen because the first kind of verified  files were JSON lines.
@@ -68,13 +69,9 @@ This application is designed to validate data from various platforms using FastA
 #### Development Environment
 
 ```sh
-curl -X 'POST' \
-  'http://127.0.0.1:8000/validate' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: multipart/form-data' \
-  -F 'lines=10' \
-  -F 'ean_key=some_key' \
-  -F 'file=@path/to/your/file.csv' | json_pp
+curl --location --request POST 'http://localhost:8000/validate' \
+--form 'file=@"/Users/andre_luiz/PycharmProjects/volix-scrapings/collect/santil/andra/santil_andra_2024-12-24-10.json"' \
+--form 'ean_key="sku"' | json_pp
 ```
 
 #### Production Environment
@@ -82,7 +79,6 @@ curl -X 'POST' \
 ```shell
 curl --location --request POST 'https://volix-validate-json-response.onrender.com/validate' \                                                                                         
 --form 'file=@"/Users/andre_luiz/PycharmProjects/volix-scrapings/collect/santil/andra/santil_andra_2024-12-24-10.json"' \
---form 'lines="50"' \
 --form 'ean_key="sku"' | json_pp
 ```
 
@@ -91,7 +87,6 @@ curl --location --request POST 'https://volix-validate-json-response.onrender.co
 ```shell
 curl --location --request POST 'https://volix-validate-json-response.onrender.com/validate' \                                                                                            ──(Thu,Jan02)─┘
 --form 'file=@"/Users/andre_luiz/PycharmProjects/volix-scrapings/collect/santil/andra/santil_andra_2024-12-24-10.json"' \
---form 'lines="50"' \
 --form 'ean_key="sku"' | json_pp
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed

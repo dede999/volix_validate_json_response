@@ -4,6 +4,10 @@ from unittest.mock import patch, MagicMock
 from domain.platforms.selenium_platform import SeleniumPlatform
 
 class TestSeleniumPlatform(IsolatedAsyncioTestCase):
+    def test_valid_instances_count(self):
+        platform = SeleniumPlatform()
+        self.assertEqual(platform.get_validation_instances_count(), 20)
+
     @patch('domain.platforms.selenium_platform.webdriver.Firefox')
     @patch('domain.platforms.selenium_platform.WebDriverWait')
     @patch('domain.platforms.selenium_platform.GeckoDriverManager')

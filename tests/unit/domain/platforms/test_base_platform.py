@@ -38,3 +38,6 @@ class TestBasePlatform(IsolatedAsyncioTestCase):
     def test_request_content(self):
         content = asyncio.run(self.base_platform.request_content("dummy_url"))
         self.assertEqual(content, None)
+
+    def test_get_validation_instances_count(self):
+        self.assertEqual(self.base_platform.get_validation_instances_count(), 10)
